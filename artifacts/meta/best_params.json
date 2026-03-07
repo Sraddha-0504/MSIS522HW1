@@ -1,0 +1,25 @@
+{
+  "Logistic Regression": {
+    "baseline": true,
+    "scaled": true
+  },
+  "Decision Tree": {
+    "max_depth": 3,
+    "min_samples_leaf": 50
+  },
+  "Random Forest": {
+    "max_depth": 5,
+    "n_estimators": 200
+  },
+  "LightGBM": {
+    "learning_rate": 0.05,
+    "max_depth": 3,
+    "n_estimators": 200
+  },
+  "Neural Network": {
+    "architecture": "128-128-ReLU",
+    "optimizer": "Adam",
+    "epochs": 30,
+    "batch_size": 256
+  }
+}

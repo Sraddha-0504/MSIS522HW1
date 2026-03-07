@@ -1,0 +1,98 @@
+{
+  "SEX": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.43057142857142855
+  },
+  "HOSPITALIZED": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.5272857142857142
+  },
+  "PNEUMONIA": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.4017142857142857
+  },
+  "AGE": {
+    "type": "numeric",
+    "min": 0.0,
+    "max": 105.0,
+    "mean": 51.079142857142855
+  },
+  "PREGNANT": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.005285714285714286
+  },
+  "DIABETES": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.23885714285714285
+  },
+  "COPD": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.031285714285714285
+  },
+  "ASTHMA": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.027142857142857142
+  },
+  "IMMUNOSUPPRESSION": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.02085714285714286
+  },
+  "HYPERTENSION": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.28785714285714287
+  },
+  "OTHER_DISEASE": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.040285714285714286
+  },
+  "CARDIOVASCULAR": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.03571428571428571
+  },
+  "OBESITY": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.18142857142857144
+  },
+  "RENAL_CHRONIC": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.04557142857142857
+  },
+  "TOBACCO": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.08142857142857143
+  },
+  "COVID_POSITIVE": {
+    "type": "binary",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.5417142857142857
+  }
+}
