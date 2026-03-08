@@ -286,6 +286,13 @@ best_recall_row = comparison_df.loc[comparison_df["Recall"].idxmax()]
 
 models, unavailable_models = load_models()
 
+if "Neural Network" in unavailable_models:
+    st.warning(
+        "Neural Network model is unavailable in this deployment because TensorFlow is not installed for "
+        "the selected Python runtime. To enable Neural Network interactive prediction, redeploy this app "
+        "with Python 3.11 in Streamlit Community Cloud > Advanced settings."
+    )
+
 
 tab1, tab2, tab3, tab4 = st.tabs(
     [
