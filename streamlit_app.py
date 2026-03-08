@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Tuple
 
 import joblib
 import matplotlib.pyplot as plt
@@ -55,23 +55,24 @@ def load_csv(path: Path) -> pd.DataFrame:
 
 
 @st.cache_resource(show_spinner=False)
-def load_models() -> Dict[str, Any]:
+def load_models() -> Tuple[Dict[str, Any], Dict[str, str]]:
     models: Dict[str, Any] = {
         "Logistic Regression": joblib.load(MODELS_DIR / "logistic_pipeline.joblib"),
         "Decision Tree": joblib.load(MODELS_DIR / "decision_tree.joblib"),
         "Random Forest": joblib.load(MODELS_DIR / "random_forest.joblib"),
         "LightGBM": joblib.load(MODELS_DIR / "lightgbm.joblib"),
     }
+    unavailable_models: Dict[str, str] = {}
 
-    # TensorFlow model is optional at app-load time; everything else remains usable if unavailable.
+    # TensorFlow model is optional at runtime; app remains fully usable without it.
     try:
         from tensorflow import keras
 
         models["Neural Network"] = keras.models.load_model(MODELS_DIR / "keras_mlp.keras")
     except Exception as e:
-        st.warning(f"Neural Network model not loaded: {e}")
+        unavailable_models["Neural Network"] = str(e)
 
-    return models
+    return models, unavailable_models
 
 
 def check_artifacts() -> bool:
@@ -283,7 +284,7 @@ best_f1_row = comparison_df.loc[comparison_df["F1 Score"].idxmax()]
 best_auc_row = comparison_df.loc[comparison_df["AUC-ROC"].idxmax()]
 best_recall_row = comparison_df.loc[comparison_df["Recall"].idxmax()]
 
-models = load_models()
+models, unavailable_models = load_models()
 
 
 tab1, tab2, tab3, tab4 = st.tabs(
@@ -426,6 +427,12 @@ with tab3:
     st.subheader("Detailed Metrics and Confusion Matrices")
     show_part2_outputs(metrics_by_model, best_params)
 
+    if "Neural Network" in unavailable_models:
+        st.info(
+            "Neural Network runtime model is unavailable in this deployment environment. "
+            "Its evaluation metrics are still shown from precomputed saved artifacts."
+        )
+
     st.subheader("Additional Part 2 Visual Outputs")
     if (PLOTS_DIR / "best_decision_tree.png").exists():
         st.image(str(PLOTS_DIR / "best_decision_tree.png"), use_container_width=True)
@@ -469,6 +476,12 @@ with tab4:
             )
             tree_model = models[best_tree_model_name]
             render_waterfall(tree_model, input_df, f"Waterfall ({best_tree_model_name})")
+
+    if "Neural Network" in unavailable_models:
+        st.caption(
+            "Neural Network interactive inference is disabled on this deployment because TensorFlow "
+            "is not installed there. Tree-based model interaction remains fully available."
+        )
 
     st.caption(
         "Note: The app loads pre-trained models and does not retrain at runtime, as required by the assignment."
