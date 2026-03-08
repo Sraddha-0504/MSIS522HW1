@@ -49,3 +49,7 @@ After step 3, `artifacts/` will contain:
 ## Deploy
 
 Push the repo to GitHub, then deploy `streamlit_app.py` on Streamlit Community Cloud.
+
+### Deployed App (Public URL)
+
+https://msis522hw1-sraddha.streamlit.app/
